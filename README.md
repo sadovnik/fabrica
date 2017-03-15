@@ -21,30 +21,32 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-class Foo
-  attr_reader :a, :b, :c
+class Point
+  attr_reader :x, :y, :z
 
-  def initialize(a, b, c)
-    @a, @b, @c = a, b, c
+  def initialize(x, y, z)
+    @x, @y, @z = x, y, z
+  end
+
+  def to_a
+    [@x, @y, @z]
   end
 end
 
-foo_factory = Fabrica.create do |b, c|
-  Foo.new('A', b, c)
+point_factory = Fabrica.create do |x, y|
+  Point.new(x, y, 0)
 end
-# => #<Fabrica::SimpleFactory:0x007fd48b0487f8 @block=#<Proc:0x007fd48b048820@:8>>
 
-foo = foo_factory.build('B', 'C')
-# => #<Foo:0x007fd48b0317d8 @a="A", @b="B", @c="C">
+point = point_factory.build(10, 20)
+# => #<Point:0x007fdac1681ca0 @x=10, @y=20, @z=0>
 
 # alternatively, you can achieve the same effect using `#create_for`
 # but without having to explicitly specify the factory method
 
-foo_factory = Fabrica.create_for(Foo, ['A'])
-# => #<Fabrica::CurryingFactory:0x007f8d84f88f40 @klass=Foo, @curried_args=["A"]>
+point_factory = Fabrica.create_for(Point, [5, 7])
 
-foo_factory.build('Y', 'Z')
-# => #<Foo:0x007f8d84f711b0 @a="A", @b="Y", @c="Z">
+point = point_factory.build(-15)
+# => #<Point:0x007fdac1660230 @x=5, @y=7, @z=-15>
 ```
 
 ## Development
