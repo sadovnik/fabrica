@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+Suppose we have a `Point` class:
+
 ```ruby
 class Point
   attr_reader :x, :y, :z
@@ -27,22 +29,24 @@ class Point
   def initialize(x, y, z)
     @x, @y, @z = x, y, z
   end
-
-  def to_a
-    [@x, @y, @z]
-  end
 end
+```
 
-point_factory = Fabrica.create do |x, y|
-  Point.new(x, y, 0)
+And we want to produce instances of it with pre-configured `x` value.
+
+### `#create`
+```ruby
+point_factory = Fabrica.create do |y, z|
+  Point.new(0, y, z)
 end
 
 point = point_factory.build(10, 20)
-# => #<Point:0x007fdac1681ca0 @x=10, @y=20, @z=0>
+# => #<Point:0x007fdac1681ca0 @x=0, @y=10, @z=20>
+```
 
-# alternatively, you can achieve the same effect using `#create_for`
-# but without having to explicitly specify the factory method
-
+### `#create_for`
+Alternatively, you can achieve the same effect using `#create_for` but without having to explicitly specify the factory method.
+```ruby
 point_factory = Fabrica.create_for(Point, [5, 7])
 
 point = point_factory.build(-15)
