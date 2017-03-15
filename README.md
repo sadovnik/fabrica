@@ -1,8 +1,6 @@
 # Fabrica
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fabrica`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Allows you to create simple factories.
 
 ## Installation
 
@@ -22,7 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+class Foo
+  attr_reader :a, :b, :c
+
+  def initialize(a, b, c)
+    @a, @b, @c = a, b, c
+  end
+end
+
+foo_factory = Fabrica.create do |b, c|
+  Foo.new('A', b, c)
+end
+# => #<Fabrica::Factory:0x007fd48b0487f8 @block=#<Proc:0x007fd48b048820@:8>>
+
+foo = foo_factory.build('B', 'C')
+# => #<Foo:0x007fd48b0317d8 @a="A", @b="B", @c="C">
+
+foo.a
+=> "A"
+foo.c
+=> "C"
+```
+
 
 ## Development
 
@@ -32,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Cyril Sadovnik/fabrica. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sadovnik/fabrica. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
