@@ -37,13 +37,6 @@ end
 foo = foo_factory.build('B', 'C')
 # => #<Foo:0x007fd48b0317d8 @a="A", @b="B", @c="C">
 
-foo.a
-# => "A"
-foo.b
-# => "B"
-foo.c
-# => "C"
-
 # alternatively, you can achieve the same effect using `#create_for`
 # but without having to explicitly specify the factory method
 
@@ -52,13 +45,6 @@ foo_factory = Fabrica.create_for(Foo, ['A'])
 
 foo_factory.build('Y', 'Z')
 # => #<Foo:0x007f8d84f711b0 @a="A", @b="Y", @c="Z">
-
-foo.a
-# => "A"
-foo.b
-# => "Y"
-foo.c
-# => "Z"
 ```
 
 ## Development
