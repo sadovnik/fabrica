@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
 class Foo
   attr_reader :a, :b, :c
 
@@ -38,27 +38,27 @@ foo = foo_factory.build('B', 'C')
 # => #<Foo:0x007fd48b0317d8 @a="A", @b="B", @c="C">
 
 foo.a
-=> "A"
+# => "A"
 foo.b
-=> "B"
+# => "B"
 foo.c
-=> "C"
+# => "C"
 
 # alternatively, you can achieve the same effect using `#create_for`
 # but without having to explicitly specify the factory method
 
 foo_factory = Fabrica.create_for(Foo, ['A'])
-=> #<Fabrica::CurryingFactory:0x007f8d84f88f40 @klass=Foo, @curried_args=["A"]>
+# => #<Fabrica::CurryingFactory:0x007f8d84f88f40 @klass=Foo, @curried_args=["A"]>
 
 foo_factory.build('Y', 'Z')
-=> #<Foo:0x007f8d84f711b0 @a="A", @b="Y", @c="Z">
+# => #<Foo:0x007f8d84f711b0 @a="A", @b="Y", @c="Z">
 
 foo.a
-=> "A"
+# => "A"
 foo.b
-=> "Y"
+# => "Y"
 foo.c
-=> "Z"
+# => "Z"
 ```
 
 ## Development
