@@ -1,5 +1,5 @@
 module Fabrica
-  class Factory
+  class SimpleFactory
     def initialize(&block)
       @block = block
     end
