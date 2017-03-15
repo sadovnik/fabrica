@@ -1,41 +1,41 @@
 require 'test_helper'
 
-class Foo
-  attr_reader :a, :b, :c
+class Point
+  attr_reader :x, :y, :z
 
-  def initialize(a, b, c)
-    @a, @b, @c = a, b, c
+  def initialize(x, y, z)
+    @x, @y, @z = x, y, z
+  end
+
+  def to_a
+    [@x, @y, @z]
   end
 end
 
 describe Fabrica do
   describe '#create' do
     it 'creates factory' do
-      foo_factory = Fabrica.create do |b, c|
-        Foo.new('A', b, c)
+      point_factory = Fabrica.create do |x, y|
+        Point.new(x, y, 0)
       end
 
-      assert_instance_of Fabrica::SimpleFactory, foo_factory
+      assert_instance_of Fabrica::SimpleFactory, point_factory
 
-      foo = foo_factory.build('B', 'C')
+      point = point_factory.build(10, 20)
 
-      assert_equal 'A', foo.a
-      assert_equal 'B', foo.b
-      assert_equal 'C', foo.c
+      assert_equal [10, 20, 0], point.to_a
     end
   end
 
   describe '#create_for' do
     it 'creates currying factory' do
-      foo_factory = Fabrica.create_for(Foo, ['Z', 'G'])
+      point_factory = Fabrica.create_for(Point, [5, 7])
 
-      assert_instance_of Fabrica::CurryingFactory, foo_factory
+      assert_instance_of Fabrica::CurryingFactory, point_factory
 
-      foo = foo_factory.build('A')
+      point = point_factory.build(-15)
 
-      assert_equal 'Z', foo.a
-      assert_equal 'G', foo.b
-      assert_equal 'A', foo.c
+      assert_equal [5, 7, -15], point.to_a
     end
   end
 end
